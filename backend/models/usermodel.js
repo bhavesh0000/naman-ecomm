@@ -35,12 +35,20 @@ const userSchema = new mongoose.Schema({
              avatar: {
                 public_id: {
                   type: String,
-                  default: "default-avatar-public-id", // You can set a default public_id if needed
+                  default: "default-avatar-public-id", // set a default public_id if needed
                 },
                 url: {
                   type: String,
-                  default: "default-avatar-url.png", // You can set a default URL if needed
+                  default: "default-avatar-url.png", // set a default URL if needed
                 },
+              },
+              resetPasswordToken: {
+                type: String,
+                default: null, // Initially, there is no reset token
+              },
+              resetPasswordTokenExpiration: {
+                type: Date,
+                default: null, // Initially, there is no reset token expiration date
               },
 },{
     timestamps:true
