@@ -5,7 +5,7 @@ const asyncHandler = require("../middleware/asyncerrorhandle")
 
 
 // @desc    Create a new user
-// @route   POST /api/v1/registeruser
+// @route   POST /api/v1/
 // @access  Public
 exports.createUser = asyncHandler(async (req, res) => {
     const { name, email, password, avatar } = req.body;
