@@ -1,6 +1,8 @@
 const mongoose = require("mongoose")
 const validator = require("validator")
 
+const bcrypt = require("bcryptjs");
+
 const { hashPassword } = require("../middleware/userMiddleware");
 
 const userSchema = new mongoose.Schema({
@@ -26,10 +28,9 @@ const userSchema = new mongoose.Schema({
                 validator: function (value) {
                   // Password must contain minimum 8 characters, at least 1 uppercase letter, 1 special character, and 1 number
                   const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])[0-9a-zA-Z!@#$%^&*]{8,}$/;
-                  return passwordRegex.test(value);
+                  return passwordRegex.test(value)
                 },
-                message:
-                  "Password must contain minimum 8 characters, at least 1 uppercase letter, 1 special character, and 1 number.",
+                message: "Password must contain minimum 8 characters, at least 1 uppercase letter, 1 special character, and 1 number."
               },
              },
              avatar: {
@@ -53,7 +54,6 @@ const userSchema = new mongoose.Schema({
 },{
     timestamps:true
 })
-// Apply the hashPassword middleware to hash the user's password before saving
 userSchema.pre("save", hashPassword);
 module.exports = mongoose.model("User", userSchema)
 
