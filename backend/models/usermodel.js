@@ -43,6 +43,12 @@ const userSchema = new mongoose.Schema({
                   default: "default-avatar-url.png", // set a default URL if needed
                 },
               },
+              orders:[
+                {
+                  type: mongoose.Schema.Types.ObjectId,
+                  ref: "order"
+                }
+              ],
               resetPasswordToken: {
                 type: String,
                 default: null, // Initially, there is no reset token
