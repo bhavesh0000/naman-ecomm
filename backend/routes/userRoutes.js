@@ -11,8 +11,6 @@ const {
   resetPassword,
 } = require("../controller/userController")
 
-const { createOrder } = require("../controller/ordercontroller")
-
 const errorHandler = require("../utils/errorHandler")
 
 const asyncHandler = require("../middleware/asyncerrorhandle")
@@ -50,9 +48,7 @@ router.route("/request-password-reset").post(asyncHandler(requestPasswordReset))
 // @route   POST /api/v1/reset-password
 router.route("/reset-password").post(asyncHandler(resetPassword))
 
-// @route   POST /api/v1/orders
-// @access  Private (Only logged-in users)
-router.route("/orders").post(verifyToken, asyncHandler(createOrder));
+
 
 router.use(errorHandler)
 

@@ -11,7 +11,7 @@ exports.createUser = asyncHandler(async (req, res) => {
     const { name, email, password, avatar } = req.body;
   
     // Create a new user using the User model
-    const user = await User.create({ name, email, password, avatar });
+    const newUser = await User.create({ name, email, password, avatar });
 
     // Generate JWT token
 
@@ -19,8 +19,9 @@ exports.createUser = asyncHandler(async (req, res) => {
   
     res.status(201).json({
       success: true,
-      user,
-    });
+       user: newUser,
+      token,
+ })
   });
 
  // @desc    User login and generate JWT token
@@ -64,6 +65,19 @@ exports.userLogin = asyncHandler(async (req, res) => {
     });
   }
 });
+
+// @desc    User logout and clear cookies
+// @route   GET /api/v1/logout
+// @access  Private
+exports.logout = asyncHandler(async (req, res) => {
+  clearCookies(res);
+
+  res.status(200).json({
+    success: true,
+    message: "Logged out successfully",
+  });
+});
+
 
   // @desc    Request Password Reset (Generate Token)
 // @route   POST /api/v1/request-password-reset
